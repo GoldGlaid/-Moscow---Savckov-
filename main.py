@@ -16,10 +16,10 @@ if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
 class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Task_2.ui')
+        uic.loadUi('Task_2.ui', self)
         self.qp = QPainter()
         self.flag = False
-        # self.pushButton.clicked.connect(self.draw)
+        self.pushButton.clicked.connect(self.pushButtonEvent)
 
     def drawz(self):
         self.flag = True
@@ -30,13 +30,16 @@ class MyWidget(QMainWindow):
             self.qp = QPainter()
             self.qp.begin(self)
 
-            self.draw(self.status)
+            self.draw()
             self.qp.end()
 
-    def draw(self, status):
+    def draw(self):
         a = random.randint(1, 255)
         self.qp.setBrush(QColor(255, 255, 0))
         self.qp.drawEllipse(100, 100, a, a)
+
+    def pushButtonEvent(self):
+        self.drawz()
 
 
 if __name__ == '__main__':
